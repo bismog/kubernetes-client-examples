@@ -1,6 +1,7 @@
 package main
 
 import (
+    "context"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -42,7 +43,7 @@ func main() {
 			},
 		},
 	}
-	_, err = coreClient.Pods("default").Create(pod)
+	_, err = coreClient.Pods("default").Create(context.TODO(), pod, metav1.CreateOptions{})
 	if err != nil {
 		panic(err)
 	}
